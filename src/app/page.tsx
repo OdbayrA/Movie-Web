@@ -1,34 +1,22 @@
-"use client";
-import { Star } from "lucide-react";
-import Image from "next/image";
-import { MovieCard } from "./_components/MovieCard";
-import { useEffect, useState } from "react";
-import { getUpcomingMovies } from "../../utils/getData";
-import { Result } from "../../utils/types";
+import { MovieListTen } from "./_components/MovieListTen";
+import {
+  getPopularMovies,
+  getTopRated,
+  getUpComingMovies,
+} from "../../utils/getData";
 
-export default function Home() {
-  const [movies, setMovies] = useState<Result[]>([]);
-  useEffect(() => {
-    const fetchMovies = async () => {
-      const { results } = await getUpcomingMovies();
-      setMovies(results);
-    };
-    fetchMovies();
-  }, []);
+export default async function Home() {
+  const { results: upcoming } = await getUpComingMovies();
+  const { results: popular } = await getPopularMovies();
+  const { results: topRated } = await getTopRated();
+  // const { results: popular } = await getPopularMovies();
+
   return (
-    <div>
-      <div>
-        <h2>Upcoming </h2>
-        <button>See mpore</button>
-      </div>
-
-      <div className="flex flex-wrap gap-8">
-        {movies.map((movie) => (
-          <div key={movie.id}>
-            <MovieCard movie={movie} />
-          </div>
-        ))}
-      </div>
+    <div className="w-full">
+      {/* <MyFooter /> */}
+      <MovieListTen movies={upcoming} label="Upcoming" />
+      <MovieListTen movies={popular} label="Popular" />
+      <MovieListTen movies={topRated} label="Top Rated" />
     </div>
   );
 }
