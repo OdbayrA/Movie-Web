@@ -17,11 +17,15 @@ export const MovieListTen = ({
           <h1>{label}</h1>
           <button>See more</button>
         </div>
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap justify-between gap-8">
           {movies.slice(0, 10).map((movie) => (
             <div key={movie.id}>
               <Link href={`/details/${movie.id}`}>
-                <MovieCard movie={movie} />
+                <MovieCard
+                  name={movie.title}
+                  rating={movie.vote_average}
+                  img={movie.poster_path}
+                />
               </Link>
             </div>
           ))}
