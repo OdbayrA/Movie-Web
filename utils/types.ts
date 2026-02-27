@@ -108,3 +108,12 @@ export interface Crew {
   department: string;
   job: string;
 }
+
+export interface GenresType {
+  genres: Genre[];
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
